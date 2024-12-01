@@ -3,15 +3,16 @@ import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap';
 import { useEffect, useRef, useState } from 'react';
 
-const Canvas = () => {
-  const [index, setIndex] = useState({value: 0})
+const Canvas = ({details}) => {
+  const { startIndex, numImages, duration, size, top, left, zIndex } = details;
+  const [index, setIndex] = useState({value:startIndex})
   const canvasRef = useRef(null)
 
   useGSAP(() => {
     gsap.to(index, {
-      value: 147,
-      duration: 3,
-      repeat: -1,
+      value: startIndex + numImages-1,
+      duration:duration,
+      repeat:-1,
       ease: "linear",
       onUpdate: () => {
         setIndex({value: Math.round(index.value)})
@@ -20,6 +21,7 @@ const Canvas = () => {
   })
 
   useEffect(() => {
+    const scale = window.devicePixelRatio;
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d');
     const img = new Image();
@@ -32,7 +34,9 @@ const Canvas = () => {
   }, [index])
 
   return (
-    <canvas ref={canvasRef} id="canvas" width="300" height="300"></canvas>
+    <canvas ref={canvasRef}
+     style={{width:`${size}px`  , height : `${size}px`}}
+     id="canvas"></canvas>
   )
 }
 

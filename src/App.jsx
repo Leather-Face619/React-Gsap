@@ -1,19 +1,48 @@
 import data from './data'
 import Canvas from './Canvas'
+import LocomotiveScroll from 'locomotive-scroll';
+import { useEffect } from 'react';
 
 const App = () => {
-  return (
-    <div className="w-full min-h-screen bg-black text-white">
-      {data.map((item, index) => (
-        <div key={index}>
-        {item.map((subItem, subIndex) => (
-          <Canvas key={subIndex} details={subItem} />
-        ))}
-        </div>
+  
+  useEffect(() => {
+    const scroll = new LocomotiveScroll();
+  }, [])
+  
+  return (<>
+    <div className="w-full relative min-h-screen">
+      {data[0].map((item, index) => (
+        
+        <Canvas key={index} details={item} />
       ))}
-     
-     
     </div>
+
+    <div className="w-full relative min-h-screen">
+      {data[1].map((item, index) => (
+        
+        <Canvas key={index} details={item} />
+      ))}
+    </div>
+    <div className="w-full relative min-h-screen">
+      {data[2].map((item, index) => (
+        
+        <Canvas key={index} details={item} />
+      ))}
+    </div>
+    <div className="w-full relative min-h-screen">
+      {data[3].map((item, index) => (
+        
+        <Canvas key={index} details={item} />
+      ))}
+    </div>
+    <div className="w-full relative min-h-screen">
+      {data[4].map((item, index) => (
+        
+        <Canvas key={index} details={item} />
+      ))}
+    </div>
+      
+      </>
   )
 }
 
